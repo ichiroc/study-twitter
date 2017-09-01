@@ -1,0 +1,7 @@
+.row.mb-3
+  .col-md-12
+    .card
+      .card-title
+        %b= link_to "@#{status.user.name}", user_path(status.user.name)
+        %small.text-muted= status.created_at
+      .card-text= status.body

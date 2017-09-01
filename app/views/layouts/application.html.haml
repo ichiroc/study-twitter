@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1, shrink-to-fit=no", :name => "viewport"}/
+
+    %title Witter
+    = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+  %y
+    %nav.navbar.navbar-toggleable-md.navbar-light.bg-faded
+      .navbar-brand Witter
+      %button.navbar-toggler.navbar-toggler-right{ data:{toggle: 'collapse', target:'#global-nav'}}
+        %span.navbar-toggler-icon
+      #global-nav.collapse.navbar-collapse
+        %ul.navbar-nav.mr-auto
+          %li.nav-item
+            = link_to 'ホーム', root_path, class: 'nav-link'
+          - if user_signed_in?
+            %li.nav-item
+              =link_to '作成', new_user_status_path(current_user), class: 'nav-link', confirm: 'Are you sure?'
+            %li.nav-item
+              =link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link', confirm: 'Are you sure?'
+    .container
+      = yield
